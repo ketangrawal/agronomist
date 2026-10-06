@@ -67,3 +67,4 @@ app.*.map.json
 # android/app/google-services.json
 echo "android/build/" >> .gitignore
 git add .gitignore/android/build/
+android/build/
