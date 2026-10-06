@@ -1,0 +1,73 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Agronomist",
+
+  "homeTakePhoto": "Take Photo",
+  "homeSpeak": "Speak",
+  "homeType": "Type",
+  "homeBestResults": "Best results when photo is clear and well-lit",
+
+  "tapToSpeak": "Tap to speak",
+  "listening": "Listening…",
+  "supportedLanguages": "Marathi & English supported",
+  "analyzeCrop": "Analyze Crop",
+  "orTypeBelow": "Or type below ↓",
+  "describeProblem": "Describe your crop problem here…",
+
+  "analysisTitle": "Analyzing your crop…",
+  "analysisSubtitle": "Our AI is checking for diseases.",
+  "stepScanning": "Scanning image…",
+  "stepIdentifying": "Identifying disease…",
+  "stepPreparing": "Preparing recommendations…",
+
+  "diagnosisResults": "Diagnosis Results",
+  "confidence": "Confidence",
+  "rootCause": "Root Cause",
+  "rootCauseDescription": "Fungal infection caused by Erysiphe cichoracearum. Spreads in humid conditions with poor air circulation. Common during monsoon season when day temperatures are warm and nights are cool.",
+  "recommendedTreatment": "Recommended Treatment",
+  "checkAnotherCrop": "🌱 Check Another Crop",
+  "diseaseNamePowderyMildewModerate": "Powdery Mildew (Moderate)",
+
+  "sulphurName": "Sulphur 80% WG",
+  "sulphurType": "Fungicide",
+  "sulphurPrice": "₹180 per kg",
+  "sulphurDosage": "3g per liter of water",
+
+  "hexaconazoleName": "Hexaconazole 5% EC",
+  "hexaconazoleType": "Systemic Fungicide",
+  "hexaconazolePrice": "₹320 per liter",
+  "hexaconazoleDosage": "2ml per liter of water",
+
+  "neemName": "Neem Oil (Organic)",
+  "neemType": "Bio-Pesticide",
+  "neemPrice": "₹240 per liter",
+  "neemDosage": "5ml per liter of water",
+
+  "save": "Save",
+  "share": "Share",
+  "delete": "Delete",
+  "savedProductCards": "Saved Product Cards",
+  "noCards": "No product cards saved yet.",
+
+  "saveSuccess": "Saved to Product Cards ✅",
+  "deleteSuccess": "Deleted product card ❌",
+  "saveError": "Error saving product card",
+
+  "price": "Price",
+  "dosage": "Dosage",
+
+  "productRecommendations": "Product Recommendations",
+
+  "homeTitle": "How would you like to check your crop?",
+  "takePhotoSubtitle": "Click a photo of your crop",
+  "speakSubtitle": "Describe the problem in your words",
+  "typeSubtitle": "Write about your crop issue",
+  "homeNote": "Best results: Take photos in daylight showing affected leaves or stems clearly.",
+
+  "cameraHint": "Point camera at affected leaves or stems",
+  "photoReady": "Photo Ready",
+  "capturePhoto": "Capture Photo",
+  "retakePhoto": "Retake",
+  "usePhoto": "Use This Photo"
+}

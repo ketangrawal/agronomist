@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "654013579497",
+    "project_id": "agronomist-112c8",
+    "storage_bucket": "agronomist-112c8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654013579497:android:355c685ee11c728c633078",
+        "android_client_info": {
+          "package_name": "com.example.agronomist"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSC4SWcC8iLWYqa5qbevV_Eat9B8--GI0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
