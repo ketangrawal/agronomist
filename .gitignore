@@ -65,3 +65,5 @@ app.*.map.json
 
 # Firebase secrets (Ensure credentials aren't public if open-sourcing)
 # android/app/google-services.json
+echo "android/build/" >> .gitignore
+git add .gitignore/android/build/
