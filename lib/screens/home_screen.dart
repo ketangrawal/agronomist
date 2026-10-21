@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
-import '../theme/app_theme.dart';
 import '../widgets/camera_input.dart';
 import '../widgets/mic_input.dart';
 import 'diagnosis_screen.dart';

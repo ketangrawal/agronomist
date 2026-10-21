@@ -292,7 +292,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen>
                               color: (_isListening
                                       ? const Color(0xFFE76F51)
                                       : const Color(0xFF2D6A4F))
-                                  .withOpacity(0.35),
+                                  .withValues(alpha: 0.35),
                               blurRadius: 10,
                               spreadRadius: 2,
                             ),

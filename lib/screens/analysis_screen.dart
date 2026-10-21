@@ -28,9 +28,13 @@ class _AnalysisScreenState extends State<AnalysisScreen>
       final args = ModalRoute.of(context)?.settings.arguments;
       if (args is String) {
         _inputText = args;
-      } else if (args is Map<String, dynamic>) {
+      } else if (args is Map) {
         _inputText = args['query'] as String?;
-        _imagePath = args['imagePath'] as String?;
+        if (args['imageFile'] is File) {
+          _imagePath = (args['imageFile'] as File).path;
+        } else if (args['imagePath'] is String) {
+          _imagePath = args['imagePath'] as String;
+        }
       }
 
       _analysisStarted = true;
@@ -67,31 +71,91 @@ class _AnalysisScreenState extends State<AnalysisScreen>
     if (mounted) setState(() => _currentStep = 1);
 
     String predictedLabel = _inputText ?? '';
-    double confidenceScore = 0.92;
+    double confidenceScore = 0.0;
+    bool isReliable = true;
 
     // Run TFLite inference if an image file was supplied
     if (_imagePath != null && _imagePath!.isNotEmpty) {
       final imageFile = File(_imagePath!);
+      debugPrint('>>> AnalysisScreen: Found image at $_imagePath (exists: ${await imageFile.exists()})');
       if (await imageFile.exists()) {
         try {
           final classifier = CropClassifier();
           await classifier.initialize();
+          debugPrint('>>> Classifier initialized. Ready: ${classifier.isReady}');
           if (classifier.isReady) {
             final predictions = await classifier.runInference(imageFile);
+            debugPrint('>>> Raw Predictions count: ${predictions.length}');
             if (predictions.isNotEmpty) {
               predictedLabel = predictions.first.label;
               confidenceScore = predictions.first.confidence;
+              debugPrint('>>> Top Prediction: $predictedLabel ($confidenceScore)');
+
+              // Gate check against tau threshold (0.65)
+              if (confidenceScore < CropClassifier.tauThreshold) {
+                isReliable = false;
+              }
             }
           }
-        } catch (e) {
-          debugPrint('TFLite inference fallback (using text query): $e');
+        } catch (e, stack) {
+          debugPrint('>>> TFLite inference error: $e');
+          debugPrint('>>> Stack: $stack');
         }
       }
+    } else {
+      debugPrint('>>> AnalysisScreen: No imagePath provided! Falling back to text: "$_inputText"');
+      confidenceScore = 0.90; // Default confidence for manual text input
     }
 
     // Step 2: Identifying condition
     await Future.delayed(const Duration(milliseconds: 900));
     if (mounted) setState(() => _currentStep = 2);
+
+    // If gate failed (confidence < 0.65), prompt user to retake instead of serving wrong prescription
+    if (!isReliable) {
+      if (mounted) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (ctx) => AlertDialog(
+            backgroundColor: const Color(0xFFFEFAE0),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            title: const Row(
+              children: [
+                Text("⚠️ ", style: TextStyle(fontSize: 22)),
+                Text(
+                  'Low Confidence',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF1B4332),
+                  ),
+                ),
+              ],
+            ),
+            content: Text(
+              'The model could not identify the disease with sufficient certainty (${(confidenceScore * 100).toStringAsFixed(1)}%).\n\n'
+              'To avoid incorrect treatment, please retake a clear, well-lit photo focused closely on the leaf symptoms.',
+              style: const TextStyle(fontSize: 14, color: Color(0xFF2D6A4F), height: 1.4),
+            ),
+            actions: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF2D6A4F),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                ),
+                onPressed: () {
+                  Navigator.pop(ctx);
+                  Navigator.pop(context); // Return back to home camera/input screen
+                },
+                child: const Text('Retake Photo'),
+              ),
+            ],
+          ),
+        );
+      }
+      return;
+    }
 
     // Resolve disease & recommended BIO-F product mapping
     final treatment = CropDiseaseRepository.findTreatment(predictedLabel);
@@ -115,7 +179,7 @@ class _AnalysisScreenState extends State<AnalysisScreen>
           'dosageEn': treatment.dosageGuideEn,
           'dosageMr': treatment.dosageGuideMr,
           'confidence': confidenceScore,
-          'severity': confidenceScore > 0.85 ? 'High' : 'Moderate',
+          'severity': confidenceScore > 0.80 ? 'Severe' : 'Moderate',
           'imagePath': _imagePath,
           'rawQuery': _inputText ?? '',
         },

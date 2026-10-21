@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import '../l10n/app_localizations.dart';
-import '../screens/analysis_screen.dart'; // ✅ ensure path is correct
+import '../screens/analysis_screen.dart';
 
 class CameraInput extends StatefulWidget {
   const CameraInput({super.key});
@@ -24,15 +25,47 @@ class _CameraInputState extends State<CameraInput> {
     }
   }
 
+  Future<void> _pickFromGallery() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
+    }
+  }
+
+  void _proceedToAnalysis() {
+    if (_imageFile == null) return;
+
+    // ✅ Explicitly forward the picked image file path into AnalysisScreen
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AnalysisScreen(),
+        settings: RouteSettings(
+          arguments: {
+            'imagePath': _imageFile!.path,
+            'imageFile': _imageFile!,
+          },
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(title: Text(loc.homeTakePhoto)),
+      backgroundColor: const Color(0xFFFEFAE0),
+      appBar: AppBar(
+        title: Text(loc.homeTakePhoto),
+        backgroundColor: const Color(0xFF1B4332),
+        foregroundColor: Colors.white,
+      ),
       body: Column(
         children: [
-          // ✅ Viewfinder
+          // Viewfinder
           Expanded(
             child: Container(
               margin: const EdgeInsets.all(16),
@@ -40,6 +73,7 @@ class _CameraInputState extends State<CameraInput> {
                 color: Colors.black,
                 borderRadius: BorderRadius.circular(20),
               ),
+              clipBehavior: Clip.antiAlias,
               child: Stack(
                 fit: StackFit.expand,
                 children: [
@@ -48,8 +82,11 @@ class _CameraInputState extends State<CameraInput> {
                     Image.file(_imageFile!, fit: BoxFit.cover)
                   else
                     const Center(
-                      child: Icon(Icons.camera_alt,
-                          size: 80, color: Colors.white),
+                      child: Icon(
+                        Icons.camera_alt,
+                        size: 80,
+                        color: Colors.white54,
+                      ),
                     ),
 
                   // Hint pill (before capture)
@@ -61,9 +98,11 @@ class _CameraInputState extends State<CameraInput> {
                       child: Center(
                         child: Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 6),
+                            horizontal: 14,
+                            vertical: 8,
+                          ),
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.5),
+                            color: Colors.black.withValues(alpha: 0.6),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
@@ -84,16 +123,17 @@ class _CameraInputState extends State<CameraInput> {
                       right: 12,
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 4),
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
                         decoration: BoxDecoration(
-                          color: Colors.green,
+                          color: const Color(0xFF2D6A4F),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(Icons.check,
-                                size: 14, color: Colors.white),
+                            const Icon(Icons.check, size: 14, color: Colors.white),
                             const SizedBox(width: 4),
                             Text(
                               loc.photoReady,
@@ -112,55 +152,96 @@ class _CameraInputState extends State<CameraInput> {
             ),
           ),
 
-          // ✅ Bottom buttons
+          // Bottom Controls
           Padding(
             padding: const EdgeInsets.all(16),
             child: _imageFile != null
                 ? Row(
                     children: [
                       Expanded(
-                        child: ElevatedButton(
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            side: const BorderSide(color: Color(0xFF2D6A4F)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
                           onPressed: () => setState(() => _imageFile = null),
-                          child: Text(loc.retakePhoto),
+                          child: Text(
+                            loc.retakePhoto,
+                            style: const TextStyle(
+                              color: Color(0xFF2D6A4F),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const AnalysisScreen(), // parameterless
-                              ),
-                            );
-                          },
-                          child: Text(loc.usePhoto),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF2D6A4F),
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: _proceedToAnalysis,
+                          child: Text(
+                            loc.usePhoto,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                     ],
                   )
-                : ElevatedButton.icon(
-                    onPressed: _capturePhoto,
-                    icon: const Icon(Icons.camera_alt),
-                    label: Text(loc.capturePhoto),
+                : Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            side: const BorderSide(color: Color(0xFF2D6A4F)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: _pickFromGallery,
+                          icon: const Icon(Icons.photo_library, color: Color(0xFF2D6A4F)),
+                          label: const Text(
+                            'Gallery',
+                            style: TextStyle(
+                              color: Color(0xFF2D6A4F),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF2D6A4F),
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: _capturePhoto,
+                          icon: const Icon(Icons.camera_alt),
+                          label: Text(
+                            loc.capturePhoto,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _cornerGuide(Alignment alignment) {
-    return Align(
-      alignment: alignment,
-      child: Container(
-        width: 32,
-        height: 32,
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.white, width: 3),
-        ),
       ),
     );
   }

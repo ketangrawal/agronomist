@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
-import '../screens/analysis_screen.dart'; // ✅ make sure this path is correct
+import '../screens/analysis_screen.dart';
 
 
 class MicInput extends StatefulWidget {
@@ -224,8 +224,8 @@ class _MicInputState extends State<MicInput> with TickerProviderStateMixin {
                   ),
                   backgroundColor: const Color(0xFF2d6a4f),
                   foregroundColor: Colors.white,
-                  disabledBackgroundColor: const Color(0xFF2d6a4f).withOpacity(0.5),
-                  disabledForegroundColor: Colors.white.withOpacity(0.5),
+                  disabledBackgroundColor: const Color(0xFF2d6a4f).withValues(alpha: 0.5),
+                  disabledForegroundColor: Colors.white.withValues(alpha: 0.5),
                 ),
               ),
             ),
@@ -246,7 +246,7 @@ class _MicInputState extends State<MicInput> with TickerProviderStateMixin {
             height: 112,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.red.withOpacity(opacity * (1 - controller.value)),
+              color: Colors.red.withValues(alpha: opacity * (1 - controller.value)),
             ),
           ),
         );

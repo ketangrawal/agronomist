@@ -92,7 +92,20 @@ class CropDiseaseRepository {
   };
 
   static final Map<String, CropTreatmentRule> _treatments = {
-    // CASH CROPS
+    // ==========================================
+    // 11 TFLITE MODEL CLASSES (MATCHING labels.txt)
+    // ==========================================
+    'sugarcane_rust': const CropTreatmentRule(
+      cropName: 'Sugarcane',
+      diseaseNameEn: 'Sugarcane Rust',
+      diseaseNameMr: 'ऊसावरील तांबेरा रोग',
+      reasonEn: 'Puccinia melanocephala causing elongated orange-brown pustules on both leaf surfaces.',
+      reasonMr: 'पक्सिनिया मेलानोसेफाला बुरशीमुळे पानांच्या दोन्ही बाजूंस लांबट नारंगी-तपकिरी रंगाच्या पुटकुळ्या तयार होतात.',
+      recommendedProducts: ['BIO-F Super', 'BIO-F Fishmeal'],
+      productKeys: ['bio_f_super', 'bio_f_fishmeal'],
+      dosageGuideEn: 'Apply BIO-F Super (50 kg/acre) along with BIO-F Fishmeal (100 kg/acre) at root zone to boost foliage resistance.',
+      dosageGuideMr: 'रोगास प्रतिकारशक्ती वाढवण्यासाठी मुळांजवळ बायो-एफ सुपर (५० किलो/एकर) आणि बायो-एफ फिशमील (१०० किलो/एकर) वापरा.',
+    ),
     'sugarcane_red_rot': const CropTreatmentRule(
       cropName: 'Sugarcane',
       diseaseNameEn: 'Sugarcane Red Rot',
@@ -104,6 +117,109 @@ class CropDiseaseRepository {
       dosageGuideEn: 'Apply BIO-F Fishmeal (100 kg/acre) + BIO-F Super at root zone.',
       dosageGuideMr: 'मुळांजवळ बायो-एफ फिशमील (१०० किलो/एकर) + बायो-एफ सुपर वापरा.',
     ),
+    'sugarcane_yellow_leaf': const CropTreatmentRule(
+      cropName: 'Sugarcane',
+      diseaseNameEn: 'Sugarcane Yellow Leaf Disease',
+      diseaseNameMr: 'ऊसाचा पिवळा पान रोग (YLD)',
+      reasonEn: 'Sugarcane yellow leaf virus (SCYLV) causing midrib yellowing that spreads outward.',
+      reasonMr: 'विषाणूमुळे मुख्य शिरा पिवळी पडते आणि संपूर्ण पानात पिवळेपणा पसरतो.',
+      recommendedProducts: ['BIO-F Super', 'BIO-F Fishmeal'],
+      productKeys: ['bio_f_super', 'bio_f_fishmeal'],
+      dosageGuideEn: 'Apply BIO-F Super (75 kg/acre) and BIO-F Fishmeal (120 kg/acre) to restore chlorophyll and plant vitality.',
+      dosageGuideMr: 'हरितद्रव्य व झाडाची ताकद वाढवण्यासाठी बायो-एफ सुपर (७५ किलो/एकर) व बायो-एफ फिशमील वापरा.',
+    ),
+    'sugarcane_healthy': const CropTreatmentRule(
+      cropName: 'Sugarcane',
+      diseaseNameEn: 'Healthy Sugarcane Crop',
+      diseaseNameMr: 'निरोगी ऊस पीक',
+      reasonEn: 'No visible disease symptoms or nutrient deficiencies detected.',
+      reasonMr: 'पिकावर कोणत्याही रोगाची किंवा पोषक तत्वांच्या कमतरतेची लक्षणे दिसत नाहीत.',
+      recommendedProducts: ['BIO-F Super'],
+      productKeys: ['bio_f_super'],
+      dosageGuideEn: 'Maintain soil vitality with standard maintenance dose of BIO-F Super (50 kg/acre).',
+      dosageGuideMr: 'पिकाची सुदृढ वाढ टिकवून ठेवण्यासाठी बायो-एफ सुपर (५० किलो/एकर) वापरा.',
+    ),
+    'maize_common_rust': const CropTreatmentRule(
+      cropName: 'Maize',
+      diseaseNameEn: 'Maize Common Rust',
+      diseaseNameMr: 'मक्यावरील तांबेरा',
+      reasonEn: 'Puccinia sorghi forming powdery cinnamon-brown pustules.',
+      reasonMr: 'पानांच्या दोन्ही बाजूंना तांबूस-तपकिरी रंगाच्या पुटकुळ्या तयार होतात.',
+      recommendedProducts: ['BIO-F Phosphate'],
+      productKeys: ['bio_f_phosphate'],
+      dosageGuideEn: 'Basal application of BIO-F Phosphate (50 kg/acre) to build stem resistance.',
+      dosageGuideMr: 'पेरणीच्या वेळी बायो-एफ फॉस्फेट (५० किलो/एकर) चा बेसल डोस द्या.',
+    ),
+    'maize_turcicum_leaf_blight': const CropTreatmentRule(
+      cropName: 'Maize',
+      diseaseNameEn: 'Turcicum Leaf Blight',
+      diseaseNameMr: 'मक्यावरील तुर्सिकम करपा',
+      reasonEn: 'Exserohilum turcicum producing long elliptical lesions.',
+      reasonMr: 'पानांवर लांबट बोट किंवा सिगारच्या आकाराचे तपकिरी पट्टे तयार होतात.',
+      recommendedProducts: ['BIO-F Phosphate'],
+      productKeys: ['bio_f_phosphate'],
+      dosageGuideEn: 'Apply BIO-F Phosphate (50 kg/acre) during knee-high vegetative stage.',
+      dosageGuideMr: 'गुडघा-उंची अवस्थेत बायो-एफ फॉस्फेट (५० किलो/एकर) द्या.',
+    ),
+    'maize_maydis_leaf_blight': const CropTreatmentRule(
+      cropName: 'Maize',
+      diseaseNameEn: 'Maydis Leaf Blight',
+      diseaseNameMr: 'मक्यावरील मायडिस करपा',
+      reasonEn: 'Bipolaris maydis creating rectangular brown lesions constrained between veins.',
+      reasonMr: 'शिरांमधील भागात लहान चौकोनी करड्या-तपकिरी रंगाचे डाग पडतात.',
+      recommendedProducts: ['BIO-F Phosphate'],
+      productKeys: ['bio_f_phosphate'],
+      dosageGuideEn: 'Soil application of BIO-F Phosphate to boost root biomass and immunity.',
+      dosageGuideMr: 'जमिनीची सुपीकता व मुळांची क्षमता वाढवण्यासाठी बायो-एफ फॉस्फेट द्या.',
+    ),
+    'maize_healthy': const CropTreatmentRule(
+      cropName: 'Maize',
+      diseaseNameEn: 'Healthy Maize Crop',
+      diseaseNameMr: 'निरोगी मका पीक',
+      reasonEn: 'Vibrant green leaf canopy with no foliar blight or rust symptoms.',
+      reasonMr: 'मक्याची पाने पूर्णपणे निरोगी आणि रोगमुक्त आहेत.',
+      recommendedProducts: ['BIO-F Phosphate'],
+      productKeys: ['bio_f_phosphate'],
+      dosageGuideEn: 'Apply BIO-F Phosphate (50 kg/acre) during sowing/earthing-up to support cob development.',
+      dosageGuideMr: 'कणीस भरण्याच्या काळात पोषण मिळण्यासाठी बायो-एफ फॉस्फेट वापरा.',
+    ),
+    'soybean_rust': const CropTreatmentRule(
+      cropName: 'Soybean',
+      diseaseNameEn: 'Soybean Rust',
+      diseaseNameMr: 'सोयाबीन तांबेरा रोग',
+      reasonEn: 'Phakopsora pachyrhizi forming tan to dark brown lesions.',
+      reasonMr: 'पानांच्या मागच्या बाजूला तपकिरी रंगाचे पुटकुळे येतात व पाने गळतात.',
+      recommendedProducts: ['BIO-F Phosphate'],
+      productKeys: ['bio_f_phosphate'],
+      dosageGuideEn: 'Soil application of BIO-F Phosphate (50 kg/acre) prior to flowering stage.',
+      dosageGuideMr: 'फुलोऱ्यापूर्वी बायो-एफ फॉस्फेट (५० किलो/एकर) मातीत टाका.',
+    ),
+    'soybean_potassium_deficiency': const CropTreatmentRule(
+      cropName: 'Soybean',
+      diseaseNameEn: 'Soybean Potassium Deficiency',
+      diseaseNameMr: 'सोयाबीन पोटॅशियम कमतरता',
+      reasonEn: 'Yellowing and chlorosis along outer leaf margins while inner leaf remains green.',
+      reasonMr: 'पानांच्या कडा पिवळ्या पडून वाळतात (कडा करपणे), मात्र मधला भाग हिरवा राहतो.',
+      recommendedProducts: ['BIO-F Super', 'BIO-F Fishmeal'],
+      productKeys: ['bio_f_super', 'bio_f_fishmeal'],
+      dosageGuideEn: 'Apply BIO-F Super (50 kg/acre) + BIO-F Fishmeal (100 kg/acre) to replenish soil potash and trace minerals.',
+      dosageGuideMr: 'जमिनीतील पोटॅश व सूक्ष्म घटकांची भरपाई करण्यासाठी बायो-एफ सुपर व फिशमील वापरा.',
+    ),
+    'soybean_healthy': const CropTreatmentRule(
+      cropName: 'Soybean',
+      diseaseNameEn: 'Healthy Soybean Crop',
+      diseaseNameMr: 'निरोगी सोयाबीन पीक',
+      reasonEn: 'Good canopy foliage without rust pustules or chlorotic yellowing.',
+      reasonMr: 'सोयाबीनचे पीक निरोगी असून कोणतीही रोगाची लक्षणे नाहीत.',
+      recommendedProducts: ['BIO-F Phosphate'],
+      productKeys: ['bio_f_phosphate'],
+      dosageGuideEn: 'Apply BIO-F Phosphate (50 kg/acre) at basal dressing for healthy root nodules.',
+      dosageGuideMr: 'गाठींच्या योग्य विकासासाठी ५० किलो बायो-एफ फॉस्फेट वापरा.',
+    ),
+
+    // ==========================================
+    // OTHER KHARIF & CASH CROPS
+    // ==========================================
     'sugarcane_smut': const CropTreatmentRule(
       cropName: 'Sugarcane',
       diseaseNameEn: 'Sugarcane Smut (Whip Smut)',
@@ -159,8 +275,6 @@ class CropDiseaseRepository {
       dosageGuideEn: 'Soil revitalization with BIO-F Super to build systemic crop resistance.',
       dosageGuideMr: 'झाडाची रोगप्रतिकारशक्ती वाढवण्यासाठी बायो-एफ सुपरचा वापर करा.',
     ),
-
-    // KHARIF CEREALS & GRAINS
     'rice_blast': const CropTreatmentRule(
       cropName: 'Rice',
       diseaseNameEn: 'Rice Blast',
@@ -193,39 +307,6 @@ class CropDiseaseRepository {
       productKeys: ['bio_f_phosphate'],
       dosageGuideEn: 'Apply BIO-F Phosphate at panicle initiation stage to fortify plant walls.',
       dosageGuideMr: 'पिकाची ताकद वाढवण्यासाठी पोटरीच्या अवस्थेत बायो-एफ फॉस्फेट वापरा.',
-    ),
-    'maize_turcicum_leaf_blight': const CropTreatmentRule(
-      cropName: 'Maize',
-      diseaseNameEn: 'Turcicum Leaf Blight',
-      diseaseNameMr: 'मक्यावरील तुर्सिकम करपा',
-      reasonEn: 'Exserohilum turcicum producing long elliptical lesions.',
-      reasonMr: 'पानांवर लांबट बोट किंवा सिगारच्या आकाराचे तपकिरी पट्टे तयार होतात.',
-      recommendedProducts: ['BIO-F Phosphate'],
-      productKeys: ['bio_f_phosphate'],
-      dosageGuideEn: 'Apply BIO-F Phosphate (50 kg/acre) during knee-high vegetative stage.',
-      dosageGuideMr: 'गुडघा-उंची अवस्थेत बायो-एफ फॉस्फेट (५० किलो/एकर) द्या.',
-    ),
-    'maize_common_rust': const CropTreatmentRule(
-      cropName: 'Maize',
-      diseaseNameEn: 'Maize Common Rust',
-      diseaseNameMr: 'मक्यावरील तांबेरा',
-      reasonEn: 'Puccinia sorghi forming powdery cinnamon-brown pustules.',
-      reasonMr: 'पानांच्या दोन्ही बाजूंना तांबूस-तपकिरी रंगाच्या पुटकुळ्या तयार होतात.',
-      recommendedProducts: ['BIO-F Phosphate'],
-      productKeys: ['bio_f_phosphate'],
-      dosageGuideEn: 'Basal application of BIO-F Phosphate (50 kg/acre) to build stem resistance.',
-      dosageGuideMr: 'पेरणीच्या वेळी बायो-एफ फॉस्फेट (५० किलो/एकर) चा बेसल डोस द्या.',
-    ),
-    'maize_maydis_leaf_blight': const CropTreatmentRule(
-      cropName: 'Maize',
-      diseaseNameEn: 'Maydis Leaf Blight',
-      diseaseNameMr: 'मक्यावरील मायडिस करपा',
-      reasonEn: 'Bipolaris maydis creating rectangular brown lesions constrained between veins.',
-      reasonMr: 'शिरांमधील भागात लहान चौकोनी करड्या-तपकिरी रंगाचे डाग पडतात.',
-      recommendedProducts: ['BIO-F Phosphate'],
-      productKeys: ['bio_f_phosphate'],
-      dosageGuideEn: 'Soil application of BIO-F Phosphate to boost root biomass and immunity.',
-      dosageGuideMr: 'जमिनीची सुपीकता व मुळांची क्षमता वाढवण्यासाठी बायो-एफ फॉस्फेट द्या.',
     ),
     'jowar_grain_mold': const CropTreatmentRule(
       cropName: 'Jowar',
@@ -293,8 +374,6 @@ class CropDiseaseRepository {
       dosageGuideEn: 'Soil application of BIO-F Phosphate (50 kg/acre).',
       dosageGuideMr: 'बायो-एफ फॉस्फेट (५० किलो/एकर) मातीत टाका.',
     ),
-
-    // KHARIF PULSES
     'tur_fusarium_wilt': const CropTreatmentRule(
       cropName: 'Tur Dal',
       diseaseNameEn: 'Tur Fusarium Wilt',
@@ -394,41 +473,6 @@ class CropDiseaseRepository {
       dosageGuideEn: 'Apply BIO-F Phosphate (50 kg/acre) before pod formation.',
       dosageGuideMr: 'शेंगा भरण्यापूर्वी बायो-एफ फॉस्फेट जमिनीत टाका.',
     ),
-
-    // KHARIF OILSEEDS
-    'soybean_rust': const CropTreatmentRule(
-      cropName: 'Soybean',
-      diseaseNameEn: 'Soybean Rust',
-      diseaseNameMr: 'सोयाबीन तांबेरा रोग',
-      reasonEn: 'Phakopsora pachyrhizi forming tan to dark brown lesions.',
-      reasonMr: 'पानांच्या मागच्या बाजूला तपकिरी रंगाचे पुटकुळे येतात व पाने गळतात.',
-      recommendedProducts: ['BIO-F Phosphate'],
-      productKeys: ['bio_f_phosphate'],
-      dosageGuideEn: 'Soil application of BIO-F Phosphate (50 kg/acre) prior to flowering stage.',
-      dosageGuideMr: 'फुलोऱ्यापूर्वी बायो-एफ फॉस्फेट (५० किलो/एकर) मातीत टाका.',
-    ),
-    'soybean_bacterial_blight': const CropTreatmentRule(
-      cropName: 'Soybean',
-      diseaseNameEn: 'Soybean Bacterial Blight',
-      diseaseNameMr: 'सोयाबीन जिवाणू करपा',
-      reasonEn: 'Pseudomonas savastanoi pv. glycinea causing water-soaked angular leaf spots.',
-      reasonMr: 'पानांवर पिवळ्या कड असलेले लहान काळे डाग पडतात.',
-      recommendedProducts: ['BIO-F Phosphate'],
-      productKeys: ['bio_f_phosphate'],
-      dosageGuideEn: 'Apply BIO-F Phosphate at early vegetative stage.',
-      dosageGuideMr: 'पेरणीनंतर २०-२५ दिवसांनी बायो-एफ फॉस्फेटचा वापर करा.',
-    ),
-    'soybean_frogeye_leaf_spot': const CropTreatmentRule(
-      cropName: 'Soybean',
-      diseaseNameEn: 'Soybean Frogeye Leaf Spot',
-      diseaseNameMr: 'सोयाबीन फ्रॉग-आय ठिपके',
-      reasonEn: 'Cercospora sojina causing circular eye-like lesions.',
-      reasonMr: 'पानांवर बेडकाच्या डोळ्यासारखे मध्यभागी पांढरे ठिपके पडतात.',
-      recommendedProducts: ['BIO-F Phosphate'],
-      productKeys: ['bio_f_phosphate'],
-      dosageGuideEn: 'Apply BIO-F Phosphate (50 kg/acre) to restore soil mineral balance.',
-      dosageGuideMr: 'मातीचे पोषण सुधारण्यासाठी बायो-एफ फॉस्फेट वापरा.',
-    ),
     'groundnut_tikka_leaf_spot': const CropTreatmentRule(
       cropName: 'Groundnut',
       diseaseNameEn: 'Groundnut Tikka Leaf Spot',
@@ -464,7 +508,6 @@ class CropDiseaseRepository {
     ),
   };
 
-  // Getters for legacy diagnosis services
   static List<CropTreatmentRule> get treatments => _treatments.values.toList();
   static Map<String, CropTreatmentRule> get treatmentsMap => _treatments;
 
@@ -480,20 +523,22 @@ class CropDiseaseRepository {
     if (rawQuery.trim().isEmpty) return _defaultTreatment;
     final normalized = normalizeKey(rawQuery);
 
+    // 1. Direct exact key match (highest priority)
     if (_treatments.containsKey(normalized)) {
       return _treatments[normalized]!;
     }
 
+    // 2. Substring matching against keys
     for (final entry in _treatments.entries) {
       if (normalized.contains(entry.key) || entry.key.contains(normalized)) {
         return entry.value;
       }
     }
 
+    // 3. Fallback matching against display names
     final lower = rawQuery.toLowerCase();
     for (final rule in _treatments.values) {
-      if (lower.contains(rule.cropName.toLowerCase()) ||
-          lower.contains(rule.diseaseNameEn.toLowerCase()) ||
+      if (lower.contains(rule.diseaseNameEn.toLowerCase()) ||
           lower.contains(rule.diseaseNameMr.toLowerCase())) {
         return rule;
       }
@@ -506,9 +551,9 @@ class CropDiseaseRepository {
     cropName: 'Unavailable',
     diseaseNameEn: 'Crop / Disease Data Unavailable',
     diseaseNameMr: 'पीक किंवा रोगाची माहिती उपलब्ध नाही',
-    reasonEn: 'The scanned plant or entered condition is not currently covered in our 33 Kharif & Cash crop database. Please verify the crop or consult an agronomist.',
-    reasonMr: 'स्कॅन केलेले पीक किंवा टाकलेला रोग सध्या आमच्या ३३ खरीप आणि बागायती पिकांच्या यादीत उपलब्ध नाही. कृपया पिकाची खात्री करा किंवा तज्ज्ञांशी संपर्क साधा.',
-    recommendedProducts: [], // No products recommended when unrecognized
+    reasonEn: 'The scanned plant or entered condition is not currently covered in our crop database. Please verify the crop or consult an agronomist.',
+    reasonMr: 'स्कॅन केलेले पीक किंवा टाकलेला रोग सध्या आमच्या डेटाबेसमध्ये उपलब्ध नाही. कृपया पिकाची खात्री करा किंवा तज्ज्ञांशी संपर्क साधा.',
+    recommendedProducts: [],
     productKeys: [],
     dosageGuideEn: 'No specific BIO-F dosage available for unrecognized crop conditions.',
     dosageGuideMr: 'अनोळखी पिकाच्या स्थितीसाठी विशिष्ट बायो-एफ डोस उपलब्ध नाही.',
