@@ -11,12 +11,10 @@ An intelligent, on-device agricultural diagnostic and advisory platform built wi
 
 ## 📸 System Walkthrough & Operational Pipeline
 
-| (a) Multi-Modal Entry | (b) Symptom Capture | (c) Runtime Gate Verification | (d) Clinical Prescription |
+| (a) Multi-Modal Entry | (b) Specimen Acquisition | (c) Real-Time Inference | (d) Clinical Prescription |
 |:---:|:---:|:---:|:---:|
-| <img src="assets/screenshots/home_screen.png" width="210"/> | <img src="assets/screenshots/capture_screen.png" width="210"/> | <img src="assets/screenshots/terminal_log.png" width="210"/> | <img src="assets/screenshots/diagnosis_screen.png" width="210"/> |
-| *Visual, voice & text modes with 1-tap Marathi localization.* | *In-app viewfinder validating input aspect ratio.* | *Desktop TFLite trace resolving gate $\tau \ge 0.65$.* | *Confidence score (79%) & per-acre organic dosage.* |
-
----
+| <img src="assets/screenshots/snap_2026-10-21_22-25-14.png" width="210"/> | <img src="assets/screenshots/snap_2026-10-21_22-26-39.png" width="210"/> | <img src="assets/screenshots/snap_2026-10-21_22-27-04.png" width="210"/> | <img src="assets/screenshots/snap_2026-10-21_22-27-39.png" width="210"/> |
+| *Visual, voice & text modes with 1-tap Marathi localization.* | *In-app viewfinder capturing leaf pathology with voice/text fallback.* | *Local quantized TFLite inference verifying decision gate $\tau \ge 0.65$.* | *Confidence score (79%) & per-acre organic bio-fertilizer dosage.* |
 
 ## 🚀 Key Features
 
