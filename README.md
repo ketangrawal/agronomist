@@ -1,32 +1,46 @@
-# 🌱 Agronomist: Smart Crop Doctor & Advisory System
+# 🌱 Agronomist: Edge-Based Crop Pathology & Advisory System
 
-An intelligent, on-device agricultural diagnostic and advisory application built with **Flutter**, **TensorFlow Lite**, and **Firebase Firestore**, designed to support Indian farmers with real-time disease identification and localized bio-fertilizer recommendations.
+[![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter)](https://flutter.dev)
+[![TensorFlow Lite](https://img.shields.io/badge/TFLite-MobileNetV2-FF6F00?logo=tensorflow)](https://www.tensorflow.org/lite)
+[![Target Arch](https://img.shields.io/badge/Architecture-ARM64%20Android-3DDC84?logo=android)](https://developer.android.com)
+[![Firebase](https://img.shields.io/badge/Backend-Firestore%20%26%20Storage-FFCA28?logo=firebase)](https://firebase.google.com)
+
+An intelligent, on-device agricultural diagnostic and advisory platform built with **Flutter**, **TensorFlow Lite**, and **Firebase Firestore**. Engineered for zero-latency, offline-capable field diagnostics, Agronomist provides smallholder farmers with real-time foliar disease detection, selective decision-gating to suppress false positives, and actionable, non-synthetic bio-fertilizer prescriptions.
+
+---
+
+## 📸 System Walkthrough & Operational Pipeline
+
+| (a) Multi-Modal Entry | (b) Symptom Capture | (c) Runtime Gate Verification | (d) Clinical Prescription |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/screenshots/home_screen.png" width="210"/> | <img src="assets/screenshots/capture_screen.png" width="210"/> | <img src="assets/screenshots/terminal_log.png" width="210"/> | <img src="assets/screenshots/diagnosis_screen.png" width="210"/> |
+| *Visual, voice & text modes with 1-tap Marathi localization.* | *In-app viewfinder validating input aspect ratio.* | *Desktop TFLite trace resolving gate $\tau \ge 0.65$.* | *Confidence score (79%) & per-acre organic dosage.* |
 
 ---
 
 ## 🚀 Key Features
 
-- **Multi-Modal Diagnostic Input**:
-  - **Visual Diagnosis**: Real-time camera capture & gallery image processing via an on-device CNN.
-  - **Speech & Text Search**: Integrated speech-to-text supporting Marathi and English agricultural terminology.
-  - **Fuzzy Matching**: Automated spelling correction and graceful fallbacks to nutrient management advice.
-- **On-Device Machine Learning**:
-  - Quantized **MobileNetV2** (224x224x3) running locally via `tflite_flutter` without cloud latency.
-  - Detects **33 crop-disease categories** across major cash crops, cereals, millets, pulses, and oilseeds.
-- **Targeted Product Recommendation Engine**:
-  - Automatic rule-based pairing of diagnosed conditions with specific **BIO-F** inputs (BIO-F Fishmeal, Phosphate, Super).
-  - Real-time cloud sync with Firebase Firestore for updated pricing and regional package details.
-- **Bilingual Support (English & Marathi)**:
-  - Complete `.arb` localization for UI strings, crop names, pathogens, and remedies.
-- **Native Sharing & History**:
-  - Export diagnostic summaries over WhatsApp/SMS using `share_plus`.
-  - Save diagnosis reports to Firebase Firestore history.
+* **Multi-Modal Diagnostic Input:**
+  * **Visual Pathology:** Real-time camera acquisition and gallery selection with automatic EXIF orientation normalization.
+  * **Speech & Voice-to-Text:** Integrated regional voice recognition supporting agricultural Marathi and English dialects.
+  * **Manual Querying:** Built-in keyword fallback and symptom lookup.
+* **Edge-Native Inference & Decision Gate:**
+  * **Quantized MobileNetV2 (224×224×3):** Runs locally via native C++ TFLite delegates with zero cloud latency and no field connectivity required.
+  * **Selective Decision Boundary ($\tau = 0.65$):** Enforces an automated abstention gate—inferences yielding confidence below 65% are flagged to request photo re-acquisition, protecting farmers against false-positive chemical or biological interventions.
+* **Targeted Organic Advisory Engine:**
+  * Mapped pathogen countermeasures prescribing specific organic inputs (**BIO-F Super**, **BIO-F Fishmeal**, and **BIO-F Phosphate**).
+  * Clear, localized dosage metrics (e.g., *50–100 kg/acre at root zone*).
+  * Real-time pricing synchronization via Firebase Firestore with offline cache fallback.
+* **Bilingual Localization:**
+  * Full ARB-based localization supporting English and Marathi across all UI elements, pathogen names, symptom descriptions, and advisory guidelines.
+* **Report Export:**
+  * Direct generation and sharing of diagnostic cards via WhatsApp, SMS, or system share sheet (`share_plus`).
 
 ---
 
-## 🌾 Supported Crops & Diseases (33 Classes)
+## 🌾 Supported Crops & Pathologies (33 Classes)
 
-| Category | Crops | Pathologies & Disorders |
+| Category | Crops | Pathologies & Physiological Disorders |
 | :--- | :--- | :--- |
 | **Cash Crops** | Sugarcane (*ऊस*), Cotton (*कापूस*) | Red Rot, Smut, Wilt, Bacterial Blight, Root Rot, Leaf Curl Virus |
 | **Cereals & Millets** | Rice (*भात*), Maize (*मका*), Jowar (*ज्वारी*), Bajra (*बाजरी*) | Blast, Brown Spot, Sheath Blight, Turcicum Leaf Blight, Common Rust, Maydis Leaf Blight, Grain Mold, Downy Mildew, Anthracnose, Ergot |
@@ -35,30 +49,26 @@ An intelligent, on-device agricultural diagnostic and advisory application built
 
 ---
 
-## 🛠️️ Architecture & Hardware Compatibility
+## 🛠 Tech Stack & Architecture
 
-- **Framework**: Flutter (Dart)
-- **AI/ML Runtime**: TensorFlow Lite (`tflite_flutter`)
-- **Backend / Cloud**: Firebase Firestore (`cloud_firestore`, `firebase_core`)
-- **Graphics Pipeline**: Configured with `RenderMode.texture` (`FlutterTextureView`) in `MainActivity.kt` to eliminate GPU surface deadlocks and ensure seamless rendering across OEM Android distributions.
+* **Frontend:** Flutter SDK (Dart)
+* **Edge ML Runtime:** `tflite_flutter` (C++ dynamic library bindings)
+* **Model Topology:** MobileNetV2 with $[-1, 1]$ zero-centered floating-point/int8 tensor normalization
+* **Cloud & Storage:** Firebase Core, Cloud Firestore, Firebase Storage
+* **Graphics Pipeline:** Configured with `RenderMode.texture` (`FlutterTextureView`) in `MainActivity.kt` to eliminate GPU surface deadlocks across customized OEM Android distributions.
 
 ---
 
 ## 📦 Getting Started
 
 ### Prerequisites
-- Flutter SDK (3.x+)
-- Android SDK (API 34+)
-- Connected physical device or Android Emulator
+* [Flutter SDK](https://docs.flutter.dev/get-started/install) (3.x+)
+* [Android SDK](https://developer.android.com/studio) (API 34+)
+* Physical Android device (ARM64 recommended) or Android Emulator
 
-### Run Locally
-```bash
-# Clone the repository
-git clone [https://github.com/ketangrawal/agronomist.git](https://github.com/ketangrawal/agronomist.git)
-cd agronomist
+### Installation & Run
 
-# Install Flutter dependencies
-flutter pub get
-
-# Run on connected target
-flutter run
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/ketangrawal/agronomist.git](https://github.com/ketangrawal/agronomist.git)
+   cd agronomist
