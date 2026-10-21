@@ -11,10 +11,21 @@ An intelligent, on-device agricultural diagnostic and advisory platform built wi
 
 ## 📸 System Walkthrough & Operational Pipeline
 
-| (a) Multi-Modal Entry | (b) Specimen Acquisition | (c) Real-Time Inference | (d) Clinical Prescription |
+### English Pipeline
+
+| (1) Multi-Modal Entry | (2) Specimen Input | (3) Edge Inference | (4) Diagnostic Report |
 |:---:|:---:|:---:|:---:|
-| <img src="assets/screenshots/snap_2026-10-21_22-25-14.png" width="210"/> | <img src="assets/screenshots/snap_2026-10-21_22-26-39.png" width="210"/> | <img src="assets/screenshots/snap_2026-10-21_22-27-04.png" width="210"/> | <img src="assets/screenshots/snap_2026-10-21_22-27-39.png" width="210"/> |
-| *Visual, voice & text modes with 1-tap Marathi localization.* | *In-app viewfinder capturing leaf pathology with voice/text fallback.* | *Local quantized TFLite inference verifying decision gate $\tau \ge 0.65$.* | *Confidence score (79%) & per-acre organic bio-fertilizer dosage.* |
+| <img src="assets/screenshots/snap_2026-10-21_22-25-14.png" width="200"/> | <img src="assets/screenshots/snap_2026-10-21_22-26-13.png" width="200"/> | <img src="assets/screenshots/snap_2026-10-21_22-26-39.png" width="200"/> | <img src="assets/screenshots/snap_2026-10-21_22-26-51.png" width="200"/> |
+| *Visual, voice & text modes with instant language toggle.* | *Captured foliar symptom with multimodal text/speech fallback.* | *Local on-device TFLite scan verifying decision gate $\tau \ge 0.65$.* | *Final diagnosis card with confidence score (79%) & bio-fertilizer dosage.* |
+
+---
+
+### मराठी कार्यप्रणाली (Marathi Pipeline)
+
+| (१) मुख्य प्रवेशद्वार | (२) लक्षण नोंदणी | (३) स्थानिक प्रक्रिया | (४) निदान व शिफारसी |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/screenshots/snap_2026-10-21_22-27-04.png" width="200"/> | <img src="assets/screenshots/snap_2026-10-21_22-27-24.png" width="200"/> | <img src="assets/screenshots/snap_2026-10-21_22-27-39.png" width="200"/> | <img src="assets/screenshots/snap_2026-10-21_22-27-52.png" width="200"/> |
+| *फोटो, आवाज आणि मजकूर पर्यायांसह मराठी संवाद फलक.* | *बाधित पानावरील तांबेरा रोगाचे छायाचित्र व लक्षण नोंदणी.* | *इंटरनेटशिवाय स्थानिक TFLite मॉडेलद्वारे रिअल-टाइम तपासणी.* | *ऊसावरील तांबेरा रोगाचे अचूक निदान आणि BIO-F सेंद्रिय खतांचा डोस.* |
 
 ## 🚀 Key Features
 
